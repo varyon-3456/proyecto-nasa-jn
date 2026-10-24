@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#061d39">
+    <meta name="description" content="Guía de supervivencia interplanetaria para explorar Marte y planificar una misión.">
+    <title>{% if current_module %}{{ current_module.title|e }} | {% endif %}Guía marciana</title>
+    <link rel="stylesheet" href="assets/app.css">
+    <script src="assets/app.js" defer></script>
+</head>
+<body data-tool-view="{{ tool_view|e }}">
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="nasa-brand" href="/#inicio" aria-label="NASA, inicio">
+                <span class="nasa-insignia" aria-hidden="true"><span>NASA</span></span>
+                <span class="brand-word">Exploración</span>
+            </a>
+            <nav class="top-nav" aria-label="Navegación principal">
+                <a href="/#inicio">Inicio</a>
+                <a href="/#mision">Misiones</a>
+                <a href="/?seccion=entorno">Ciencia</a>
+                <a href="/?seccion=rutas">Exploración</a>
+                <a href="/#guia">Noticias</a>
+                <a href="/#pie">Acerca de NASA</a>
+            </nav>
+            <form class="search-form" id="guide-search" action="/" method="get" role="search">
+                <label class="visually-hidden" for="search-input">Buscar en la guía</label>
+                <input id="search-input" name="q" type="search" placeholder="Buscar..." autocomplete="off" value="{{ search_query|e }}">
+                <button type="submit" aria-label="Buscar en la guía">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m16 16 4.3 4.3"></path></svg>
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio" aria-labelledby="page-title">
+        <div class="hero-image" role="img" aria-label="Explorador robótico estudiando el terreno de Marte"></div>
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+            <p class="hero-eyebrow">EXPLORACIÓN</p>
+            <h1 id="page-title">Guía de supervivencia<br>interplanetaria</h1>
+            <p class="hero-subtitle">Mapa de Marte</p>
+            <p class="hero-description">Prepárate para tu misión. Esta guía te ayudará a planificar,<br class="desktop-break"> explorar y sobrevivir en el entorno marciano.</p>
+        </div>
+        <span class="hero-caption">SUPERFICIE MARCIANA · SOL 184</span>
+    </section>
+
+    <main class="dashboard" id="mision">
+        <aside class="sidebar" aria-label="Secciones de la guía">
+            <a class="sidebar-link {{ 'is-active' if section == 'inicio' else '' }}" href="/" {{ ('aria-current="page"' if section == 'inicio' else '')|safe }}><span aria-hidden="true">⌂</span>Inicio</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'entorno' else '' }}" href="/?seccion=entorno" {{ ('aria-current="page"' if section == 'entorno' else '')|safe }}><span aria-hidden="true">◉</span>El entorno marciano</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'equipo' else '' }}" href="/?seccion=equipo" {{ ('aria-current="page"' if section == 'equipo' else '')|safe }}><span aria-hidden="true">♧</span>Tu equipo</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'rutas' else '' }}" href="/?seccion=rutas" {{ ('aria-current="page"' if section == 'rutas' else '')|safe }}><span aria-hidden="true">▱</span>Rutas y destinos</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'condiciones' else '' }}" href="/?seccion=condiciones" {{ ('aria-current="page"' if section == 'condiciones' else '')|safe }}><span aria-hidden="true">♨</span>Condiciones de vida</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'consejos' else '' }}" href="/?seccion=consejos" {{ ('aria-current="page"' if section == 'consejos' else '')|safe }}><span aria-hidden="true">⛨</span>Consejos de supervivencia</a>
+            <a class="sidebar-link {{ 'is-active' if section == 'recursos' else '' }}" href="/?seccion=recursos" {{ ('aria-current="page"' if section == 'recursos' else '')|safe }}><span aria-hidden="true">↗</span>Recursos y enlaces</a>
+            <a class="sidebar-link sidebar-ai-link" href="#asistente-ia" data-open-assistant><span aria-hidden="true">✳</span>Asistente IA</a>
+        </aside>
+
+        <div class="dashboard-content">
+            <section class="overview-row" aria-label="Resumen de la misión">
+                <article class="mission-intro">
+                    <span class="mission-symbol" aria-hidden="true">
+                        <svg viewBox="0 0 32 32"><path d="M16 6v5m0 0H8m8 0h8M8 11v5m8-5v5m8-5v5M16 16v5m-8 0h16M8 21v4m8-4v4m8-4v4"></path><circle cx="16" cy="4" r="2"></circle><circle cx="8" cy="18" r="2"></circle><circle cx="16" cy="18" r="2"></circle><circle cx="24" cy="18" r="2"></circle><circle cx="8" cy="27" r="2"></circle><circle cx="16" cy="27" r="2"></circle><circle cx="24" cy="27" r="2"></circle></svg>
+                    </span>
+                    <div>
+                        <h2>Tu misión</h2>
+                        <p>Explorar Marte, recopilar datos científicos, analizar el terreno y descubrir pistas sobre su pasado y su posible vida.</p>
+                    </div>
+                </article>
+                <div class="mission-facts">
+                    <div class="fact">
+                        <span class="fact-icon" aria-hidden="true">●</span>
+                        <div><strong>Destino</strong><span>Marte</span></div>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon" aria-hidden="true">▦</span>
+                        <div><strong>Duración</strong><span>Décadas</span></div>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon" aria-hidden="true">⌁</span>
+                        <div><strong>Dificultad</strong><span class="difficulty">Intermedio</span></div>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon" aria-hidden="true">⚙</span>
+                        <div><strong>Área</strong><span>Exploración espacial</span></div>
+                    </div>
+                </div>
+            </section>
+
+            {% if not_found %}
+            <section class="module-page" id="guia" aria-labelledby="guide-title">
+                <a class="back-link" href="/#guia"><span aria-hidden="true">←</span> Volver a la guía</a>
+                <div class="module-page-heading">
+                    <span class="module-number">404</span>
+                    <div>
+                        <p class="section-kicker">SECCIÓN NO DISPONIBLE</p>
+                        <h2 id="guide-title">No encontramos esta página</h2>
+                        <p>El módulo que buscas no está disponible. Vuelve a la guía para elegir otra sección.</p>
+                    </div>
+                </div>
+                <a class="module-home-link" href="/">Volver al inicio <span aria-hidden="true">→</span></a>
+            </section>
+            {% elif current_module %}
+            <section class="module-page" id="guia" aria-labelledby="guide-title">
+                <a class="back-link" href="/#guia"><span aria-hidden="true">←</span> Volver a todos los módulos</a>
+                <div class="module-page-heading">
+                    <span class="module-number">{{ current_module.number|e }}</span>
+                    <div>
+                        <p class="section-kicker">{{ current_module.label|e }}</p>
+                        <h2 id="guide-title">{{ current_module.title|e }}</h2>
+                        <p>{{ current_module.intro|e }}</p>
+                    </div>
+                </div>
+
+                <div class="module-topic-grid">
+                    {% for topic in current_module.topics %}
+                    <article class="module-topic">
+                        <span class="topic-marker" aria-hidden="true"></span>
+                        <div>
+                            <h3>{{ topic.title|e }}</h3>
+                            <p>{{ topic.description|e }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <aside class="module-ai-callout">
+                    <span class="module-ai-icon" aria-hidden="true">✳</span>
+                    <div>
+                        <h3>¿Quieres saber más sobre este tema?</h3>
+                        <p>Pregunta al asistente de IA y sigue explorando Marte.</p>
+                    </div>
+                    <button class="module-ai-button" type="button" data-ask-assistant="{{ current_module.prompt|e }}">Preguntar a la IA <span aria-hidden="true">↗</span></button>
+                </aside>
+                <p class="module-disclaimer">Contenido informativo. Contrasta los datos con fuentes científicas y los procedimientos de cada misión.</p>
+            </section>
+            {% elif search_query %}
+            <section class="search-results" id="guia" aria-labelledby="guide-title">
+                <a class="back-link" href="/"><span aria-hidden="true">←</span> Volver al inicio</a>
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">BÚSQUEDA EN LA GUÍA</p>
+                        <h2 id="guide-title">Resultados para “{{ search_query|e }}”</h2>
+                    </div>
+                    <span class="section-count">{{ matching_modules|length }} RESULTADOS</span>
+                </div>
+                {% if matching_modules %}
+                <div class="search-results-list">
+                    {% for module_key, module in matching_modules %}
+                    <a class="search-result" href="/?seccion={{ module_key|urlencode }}">
+                        <span class="search-result-number">{{ module.number|e }}</span>
+                        <span class="search-result-copy">
+                            <strong>{{ module.title|e }}</strong>
+                            <span>{{ module.intro|e }}</span>
+                        </span>
+                        <span class="search-result-arrow" aria-hidden="true">→</span>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="search-no-results">No encontramos módulos con esa búsqueda. Prueba con otras palabras.</p>
+                {% endif %}
+            </section>
+            {% else %}
+            <section class="home-welcome" id="guia">
+                <span class="home-welcome-icon" aria-hidden="true">⌖</span>
+                <div>
+                    <h2>Tu próxima parada en Marte</h2>
+                    <p>Elige una sección del menú para abrir la información de tu misión. Cada módulo tiene su propia página y su asistente IA.</p>
+                </div>
+                <span class="home-module-count">06 MÓDULOS</span>
+            </section>
+            {% endif %}
+
+            <section class="mission-tools" aria-labelledby="tools-title">
+                <div class="tool-return-bar">
+                    <nav class="module-return-nav" aria-label="Ir a un módulo de la guía">
+                        <span>Volver a módulo:</span>
+                        {% for module_key, module in modules %}
+                        <a href="/?seccion={{ module_key|urlencode }}#guia">{{ module.title|e }}</a>
+                        {% endfor %}
+                    </nav>
+                </div>
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">CENTRO DE MISIÓN</p>
+                        <h2 id="tools-title">Explora Marte</h2>
+                    </div>
+                    <span class="section-count">MAPAS · CIENCIA · APRENDIZAJE</span>
+                </div>
+                <nav class="tools-nav" aria-label="Herramientas de exploración">
+                    <a href="/?apartado=mars-map#mars-map" target="_blank" rel="noopener noreferrer">Mapa <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=nasa-gallery#nasa-gallery" target="_blank" rel="noopener noreferrer">Galería <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=mission-checklist#mission-checklist" target="_blank" rel="noopener noreferrer">Checklist <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=rovers#rovers" target="_blank" rel="noopener noreferrer">Rovers <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=mars-quiz#mars-quiz" target="_blank" rel="noopener noreferrer">Quiz <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=mars-weather#mars-weather" target="_blank" rel="noopener noreferrer">Clima <span class="visually-hidden">(nueva pestaña)</span></a>
+                    <a href="/?apartado=my-progress#my-progress" target="_blank" rel="noopener noreferrer">Favoritos y progreso <span class="visually-hidden">(nueva pestaña)</span></a>
+                </nav>
+
+                <section class="tool-panel" id="mars-map" aria-labelledby="map-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">LUGARES DE ATERRIZAJE</p><h2 id="map-title">Mapa de misiones en Marte</h2></div>
+                        <span class="data-badge">Mapa esquemático</span>
+                    </div>
+                    <p class="tool-intro">Selecciona un marcador para ver dónde aterrizaron misiones robóticas. La ilustración orienta, pero no está a escala ni sustituye un mapa topográfico.</p>
+                    <div class="mars-map-layout">
+                        <div class="mars-map" role="group" aria-label="Mapa esquemático de sitios de aterrizaje">
+                            <span class="map-legend">N ↑</span>
+                            <button class="map-marker marker-curiosity" type="button" data-site="curiosity" aria-label="Mostrar Gale, aterrizaje de Curiosity" aria-pressed="true">1</button>
+                            <button class="map-marker marker-perseverance" type="button" data-site="perseverance" aria-label="Mostrar Jezero, aterrizaje de Perseverance">2</button>
+                            <button class="map-marker marker-insight" type="button" data-site="insight" aria-label="Mostrar Elysium Planitia, aterrizaje de InSight">3</button>
+                            <span class="map-place place-gale">Gale</span><span class="map-place place-jezero">Jezero</span><span class="map-place place-elysium">Elysium</span>
+                        </div>
+                        <article class="map-detail" id="map-detail" aria-live="polite">
+                            <p class="section-kicker">SITIO SELECCIONADO</p><h3>Gale — Curiosity</h3>
+                            <p>Curiosity aterrizó en el cráter Gale el 6 de agosto de 2012 (UTC) y estudia la geología y la habitabilidad pasada.</p>
+                            <a href="https://science.nasa.gov/mission/msl-curiosity/" target="_blank" rel="noopener noreferrer">Detalles de la misión <span aria-hidden="true">↗</span></a>
+                        </article>
+                    </div>
+                    <p class="tool-source">Fuentes: <a href="https://science.nasa.gov/mission/msl-curiosity/" target="_blank" rel="noopener noreferrer">NASA Curiosity</a>, <a href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener noreferrer">NASA Perseverance</a> y <a href="https://science.nasa.gov/mission/insight/" target="_blank" rel="noopener noreferrer">NASA InSight</a>.</p>
+                </section>
+
+                <section class="tool-panel" id="nasa-gallery" aria-labelledby="gallery-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">FOTOGRAFÍAS Y CATÁLOGO</p><h2 id="gallery-title">Galería de imágenes de NASA</h2></div>
+                        <span class="data-badge">Catálogo público</span>
+                    </div>
+                    <p class="tool-intro">Imágenes, descripción y fecha de publicación según los metadatos del catálogo NASA Images.</p>
+                    <p class="gallery-status" id="gallery-status" role="status">Cargando imágenes del catálogo de NASA…</p>
+                    <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
+                    <p class="tool-source">Fuente: <a href="https://images.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Images</a>. Las imágenes se cargan desde un servicio público y requieren conexión a internet.</p>
+                </section>
+
+                <section class="tool-panel" id="mission-checklist" aria-labelledby="checklist-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">PREPARACIÓN</p><h2 id="checklist-title">Checklist de misión</h2></div>
+                        <span class="data-badge" id="checklist-count">0 de 8 listos</span>
+                    </div>
+                    <p class="tool-intro">Marca los puntos de preparación. Tu selección se guarda en este navegador.</p>
+                    <div class="checklist-grid">
+                        <label><input type="checkbox" data-checklist-item="objetivos"> Objetivos científicos definidos</label>
+                        <label><input type="checkbox" data-checklist-item="mapas"> Mapas y rutas revisados</label>
+                        <label><input type="checkbox" data-checklist-item="comunicacion"> Plan de comunicación confirmado</label>
+                        <label><input type="checkbox" data-checklist-item="energia"> Sistemas de energía verificados</label>
+                        <label><input type="checkbox" data-checklist-item="instrumentos"> Instrumentos y sensores comprobados</label>
+                        <label><input type="checkbox" data-checklist-item="seguridad"> Procedimientos de seguridad consultados</label>
+                        <label><input type="checkbox" data-checklist-item="alternativas"> Planes alternativos establecidos</label>
+                        <label><input type="checkbox" data-checklist-item="fuentes"> Fuentes y datos fechados</label>
+                    </div>
+                    <p class="tool-source">Lista educativa de planificación; no reemplaza listas certificadas de una misión real.</p>
+                </section>
+
+                <section class="tool-panel" id="rovers" aria-labelledby="rovers-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">EXPLORADORES ROBÓTICOS</p><h2 id="rovers-title">Rovers y misiones</h2></div>
+                        <span class="data-badge">Estado y ubicación según NASA</span>
+                    </div>
+                    <div class="rover-grid">
+                        <article class="rover-card"><span class="rover-status active">Misión activa</span><h3>Curiosity</h3><p><strong>Ubicación:</strong> cráter Gale, monte Sharp.</p><p><strong>Estudia:</strong> geología, clima antiguo y condiciones que pudieron favorecer vida microbiana.</p><a href="https://science.nasa.gov/mission/msl-curiosity/" target="_blank" rel="noopener noreferrer">Misión Curiosity en NASA ↗</a></article>
+                        <article class="rover-card"><span class="rover-status active">Misión activa</span><h3>Perseverance</h3><p><strong>Ubicación:</strong> cráter Jezero, explorando su antiguo delta.</p><p><strong>Estudia:</strong> geología y astrobiología; recolecta muestras para posible retorno futuro.</p><a href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener noreferrer">Misión Perseverance en NASA ↗</a></article>
+                        <article class="rover-card"><span class="rover-status ended">Misión concluida</span><h3>Opportunity</h3><p><strong>Última ubicación:</strong> cráter Endeavour; dejó de comunicarse en 2018.</p><p><strong>Estudió:</strong> rocas y evidencias de agua antigua durante una misión extendida.</p><a href="https://science.nasa.gov/mission/mars-exploration-rovers-mer/" target="_blank" rel="noopener noreferrer">Misión Mars Exploration Rovers ↗</a></article>
+                    </div>
+                    <p class="tool-source">Las ubicaciones de rovers activos cambian. Consulta las páginas enlazadas para información y registros recientes.</p>
+                </section>
+
+                <section class="tool-panel" id="mars-quiz" aria-labelledby="quiz-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">PON A PRUEBA LO APRENDIDO</p><h2 id="quiz-title">Quiz marciano</h2></div>
+                        <span class="data-badge" id="quiz-score">Mejor resultado: 0/3</span>
+                    </div>
+                    <form id="quiz-form" class="quiz-form">
+                        <fieldset class="quiz-question" data-question="0"><legend>1. ¿En qué cráter aterrizó Perseverance?</legend><button type="button" class="question-favorite" data-favorite="Pregunta: ¿En qué cráter aterrizó Perseverance?">☆ Guardar pregunta</button><label><input type="radio" name="q1" value="a" required> Gale</label><label><input type="radio" name="q1" value="b"> Jezero</label><label><input type="radio" name="q1" value="c"> Endeavour</label></fieldset>
+                        <fieldset class="quiz-question" data-question="1"><legend>2. ¿Qué estudia Curiosity en el cráter Gale?</legend><button type="button" class="question-favorite" data-favorite="Pregunta: ¿Qué estudia Curiosity en el cráter Gale?">☆ Guardar pregunta</button><label><input type="radio" name="q2" value="a" required> La geología y la habitabilidad pasada</label><label><input type="radio" name="q2" value="b"> Las nubes de Venus</label><label><input type="radio" name="q2" value="c"> Los anillos de Saturno</label></fieldset>
+                        <fieldset class="quiz-question" data-question="2"><legend>3. ¿Qué debe hacerse con los datos de clima marciano?</legend><button type="button" class="question-favorite" data-favorite="Pregunta: ¿Qué debe hacerse con los datos de clima marciano?">☆ Guardar pregunta</button><label><input type="radio" name="q3" value="a" required> Tratar cualquier dato archivado como medición en vivo</label><label><input type="radio" name="q3" value="b"> Verificar fuente y fecha de actualización</label><label><input type="radio" name="q3" value="c"> Suponer que el clima es igual en todo el planeta</label></fieldset>
+                        <button class="tool-button" type="submit">Comprobar respuestas</button>
+                        <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+                    </form>
+                </section>
+
+                <section class="tool-panel weather-panel" id="mars-weather" aria-labelledby="weather-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">OBSERVACIONES CIENTÍFICAS</p><h2 id="weather-title">Clima de Marte</h2></div>
+                        <span class="data-badge">Archivo histórico · diciembre de 2022</span>
+                    </div>
+                    <p class="weather-alert"><strong>No es una lectura en tiempo real.</strong> La estación meteorológica de InSight dejó de operar en 2022. Esta página no muestra mediciones actuales; consulta el archivo de datos científicos para los registros por sol y su fecha.</p>
+                    <div class="weather-facts"><article><strong>Fuente de mediciones</strong><span>Instrumentos meteorológicos de InSight (Mars Weather Service)</span></article><article><strong>Última actualización operativa</strong><span>Diciembre de 2022 · fin de la misión InSight</span></article><article><strong>Qué se medía</strong><span>Temperatura, presión, viento y otros datos ambientales locales</span></article></div>
+                    <p class="tool-source">Fuentes: <a href="https://science.nasa.gov/mission/insight/" target="_blank" rel="noopener noreferrer">NASA InSight</a> · <a href="https://pds.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Planetary Data System (archivo científico)</a>. La fecha indicada es el estado del archivo, no la fecha de una observación meteorológica individual.</p>
+                </section>
+
+                <section class="tool-panel" id="my-progress" aria-labelledby="progress-title">
+                    <a class="tool-panel-back" href="/#mision"><span aria-hidden="true">←</span> Volver al centro de misión</a>
+                    <div class="tool-heading">
+                        <div><p class="section-kicker">GUARDADO EN ESTE NAVEGADOR</p><h2 id="progress-title">Favoritos y progreso</h2></div>
+                        <button class="text-button" id="clear-progress" type="button">Borrar mis datos guardados</button>
+                    </div>
+                    <p class="tool-intro">Guarda las secciones y preguntas que quieras revisar. El progreso no se envía a ningún servidor.</p>
+                    <div class="progress-summary" id="progress-summary" aria-live="polite">Aún no hay favoritos ni resultados guardados.</div>
+                    <div class="favorite-buttons" aria-label="Guardar secciones favoritas">
+                        <button type="button" class="favorite-button" data-favorite="Mapa de misiones">☆ Mapa de misiones</button>
+                        <button type="button" class="favorite-button" data-favorite="Galería de NASA">☆ Galería de NASA</button>
+                        <button type="button" class="favorite-button" data-favorite="Checklist de misión">☆ Checklist</button>
+                        <button type="button" class="favorite-button" data-favorite="Rovers">☆ Rovers</button>
+                        <button type="button" class="favorite-button" data-favorite="Quiz marciano">☆ Quiz</button>
+                        <button type="button" class="favorite-button" data-favorite="Clima de Marte">☆ Clima</button>
+                    </div>
+                </section>
+
+                <section class="tool-panel preferences-panel" aria-labelledby="preferences-title">
+                    <div class="tool-heading"><div><p class="section-kicker">PREFERENCIAS</p><h2 id="preferences-title">Accesibilidad y apariencia</h2></div></div>
+                    <div class="preference-controls">
+                        <button type="button" class="tool-button" id="theme-toggle" aria-pressed="false">Activar modo oscuro</button>
+                        <div class="text-size-controls" role="group" aria-label="Tamaño del texto">
+                            <span>Tamaño del texto</span><button type="button" data-text-size="small" aria-label="Texto pequeño">A−</button><button type="button" data-text-size="normal" aria-label="Texto normal">A</button><button type="button" data-text-size="large" aria-label="Texto grande">A+</button>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section class="exploration-banner" aria-label="Explora con ayuda de la inteligencia artificial">
+                <span class="banner-icon" aria-hidden="true">⌖</span>
+                <div>
+                    <h2>El próximo paso en la exploración empieza con una pregunta.</h2>
+                    <p>Conversa con el asistente IA para descubrir ideas, preparar tu misión y planificar con curiosidad.</p>
+                </div>
+                <a href="#asistente-ia" class="banner-link" data-open-assistant>Consultar a la IA <span aria-hidden="true">↗</span></a>
+                <span class="banner-planet" aria-hidden="true"></span>
+            </section>
+
+            <p class="science-note">Contenido informativo: los datos de rutas, clima y seguridad deben verificarse con fuentes científicas y protocolos de misión actualizados.</p>
+        </div>
+    </main>
+
+    <footer class="page-footer" id="pie">
+        <div class="footer-brand">
+            <span class="nasa-insignia" aria-hidden="true"><span>NASA</span></span>
+            <div><strong>NASA</strong><span>Exploración <i>·</i> Ciencia <i>·</i> Un futuro mejor</span></div>
+        </div>
+        <span class="footer-motto">EXPLORANDO JUNTOS LO DESCONOCIDO</span>
+        <nav aria-label="Enlaces del pie de página">
+            <a href="#guia">Términos de uso</a><a href="#guia">Privacidad</a><a href="https://www.nasa.gov/contact/" target="_blank" rel="noopener noreferrer">Contacto</a>
+        </nav>
+    </footer>
+
+    <section class="assistant-widget" id="asistente-ia" aria-label="Asistente de inteligencia artificial">
+        <section class="assistant-panel" id="assistant-panel" aria-labelledby="assistant-title" hidden>
+            <header class="assistant-header">
+                <div class="assistant-avatar" aria-hidden="true">✳</div>
+                <div>
+                    <p class="eyebrow">ASISTENTE DE EXPLORACIÓN</p>
+                    <h2 id="assistant-title">Hola, explorador</h2>
+                </div>
+                <span class="online-badge"><span class="status-dot"></span> LISTO</span>
+                <button class="close-assistant" type="button" aria-label="Cerrar asistente">×</button>
+            </header>
+
+            <div class="conversation" id="conversation" aria-live="polite" aria-relevant="additions text">
+                <article class="message assistant-message">
+                    <div class="message-avatar" aria-hidden="true">✳</div>
+                    <div class="message-body">
+                        <span class="message-label">ASISTENTE</span>
+                        <p>Estoy aquí para ayudarte a preparar una exploración de Marte. Pregúntame sobre rutas, riesgos del terreno o recursos para tu misión.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="suggestions" aria-label="Preguntas sugeridas">
+                <button class="suggestion" type="button" data-prompt="¿Qué debería incluir en una lista de recursos para una caminata marciana?">Preparar recursos <span aria-hidden="true">↗</span></button>
+                <button class="suggestion" type="button" data-prompt="¿Qué factores debería evaluar antes de elegir una ruta en Marte?">Evaluar una ruta <span aria-hidden="true">↗</span></button>
+                <button class="suggestion" type="button" data-prompt="¿Qué riesgos ambientales tendría que considerar una misión humana en Marte?">Revisar riesgos <span aria-hidden="true">↗</span></button>
+            </div>
+
+            <form class="composer" id="chat-form">
+                <label class="visually-hidden" for="message-input">Escribe tu pregunta</label>
+                <textarea id="message-input" name="message" rows="1" maxlength="2000" placeholder="Pregunta lo que quieras sobre tu misión..." required></textarea>
+                <button class="send-button" type="submit" aria-label="Enviar pregunta"><span aria-hidden="true">↑</span></button>
+                <p class="composer-hint">ENTER para enviar · SHIFT + ENTER para nueva línea</p>
+            </form>
+        </section>
+
+        <button class="assistant-toggle" id="assistant-toggle" type="button" aria-expanded="false" aria-controls="assistant-panel">
+            <span class="toggle-icon" aria-hidden="true">✳</span>
+            <span>Pregúntale a la IA</span>
+        </button>
+    </section>
+</body>
+</html>
